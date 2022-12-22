@@ -1,5 +1,6 @@
 ﻿using FlowCaseTracking.Models;
 using Microsoft.EntityFrameworkCore;
+using Flow_CaseTracking.Models;
 
 namespace FlowCaseTracking.Database
 {
@@ -8,5 +9,8 @@ namespace FlowCaseTracking.Database
         public FlowCaseDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Cards> Cards { get; set; }
+
     }
 }

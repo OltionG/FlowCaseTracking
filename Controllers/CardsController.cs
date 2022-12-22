@@ -6,89 +6,89 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FlowCaseTracking.Database;
-using FlowCaseTracking.Models;
+using Flow_CaseTracking.Models;
 
 namespace Flow_CaseTracking.Controllers
 {
-    public class UsersController : Controller
+    public class CardsController : Controller
     {
         private readonly FlowCaseDbContext _context;
 
-        public UsersController(FlowCaseDbContext context)
+        public CardsController(FlowCaseDbContext context)
         {
             _context = context;
         }
 
-        // GET: Users
+        // GET: Cards
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Users.ToListAsync());
+              return View(await _context.Cards.ToListAsync());
         }
 
-        // GET: Users/Details/5
+        // GET: Cards/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Cards == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var cards = await _context.Cards
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (cards == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(cards);
         }
 
-        // GET: Users/Create
+        // GET: Cards/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Cards/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Emri,Mbiemri,Email,Password,DataLindjes,Role")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Titulli,ListId,List,Description")] Cards cards)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(cards);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(cards);
         }
 
-        // GET: Users/Edit/5
+        // GET: Cards/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Cards == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var cards = await _context.Cards.FindAsync(id);
+            if (cards == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(cards);
         }
 
-        // POST: Users/Edit/5
+        // POST: Cards/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Emri,Mbiemri,Email,Password,DataLindjes,Role")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulli,ListId,List,Description")] Cards cards)
         {
-            if (id != user.Id)
+            if (id != cards.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Flow_CaseTracking.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(cards);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!CardsExists(cards.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +113,49 @@ namespace Flow_CaseTracking.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(cards);
         }
 
-        // GET: Users/Delete/5
+        // GET: Cards/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Cards == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var cards = await _context.Cards
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (cards == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(cards);
         }
 
-        // POST: Users/Delete/5
+        // POST: Cards/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Users == null)
+            if (_context.Cards == null)
             {
-                return Problem("Entity set 'FlowCaseDbContext.Users'  is null.");
+                return Problem("Entity set 'FlowCaseDbContext.Cards'  is null.");
             }
-            var user = await _context.Users.FindAsync(id);
-            if (user != null)
+            var cards = await _context.Cards.FindAsync(id);
+            if (cards != null)
             {
-                _context.Users.Remove(user);
+                _context.Cards.Remove(cards);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool CardsExists(int id)
         {
-          return _context.Users.Any(e => e.Id == id);
+          return _context.Cards.Any(e => e.Id == id);
         }
     }
 }
