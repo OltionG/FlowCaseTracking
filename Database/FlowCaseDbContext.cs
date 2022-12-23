@@ -12,6 +12,9 @@ namespace FlowCaseTracking.Database
 
         public DbSet<Cards> Cards { get; set; }
 
+        public DbSet<Boards> Boards { get; set; }
+
+
 
     }
 }
