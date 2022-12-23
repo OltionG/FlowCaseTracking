@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FlowCaseTracking.Database;
 using FlowCaseTracking.Models;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace Flow_CaseTracking.Controllers
 {
@@ -20,9 +22,46 @@ namespace Flow_CaseTracking.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string roles)
         {
-              return View(await _context.Users.ToListAsync());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.LastnameSortParm = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
+            ViewBag.EmailSortParm = String.IsNullOrEmpty(sortOrder) ? "email_desc" : "";
+            ViewBag.RoleSortParm = String.IsNullOrEmpty(sortOrder) ? "role_desc" : "";
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
+            var users = from s in _context.Users
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(s => s.Emri.Contains(searchString));
+            }
+			if (roles != null)
+            {
+				users = users.Where(u => roles.Contains(u.Role));
+			}
+
+			switch (sortOrder)
+            {
+                case "name_desc":
+                    users = users.OrderByDescending(s => s.Emri);
+                    break;
+                case "lastname_desc":
+                    users = users.OrderByDescending(s => s.Mbiemri);
+                    break;
+                case "email_desc":
+                    users = users.OrderByDescending(s => s.Email);
+                    break;
+                case "date_desc":
+                    users = users.OrderByDescending(s => s.DataLindjes);
+                    break;
+                case "role_desc":
+                    users = users.OrderBy(s => s.Role);
+                    break;
+                default:
+                    users = users.OrderBy(s => s.Emri);
+                    break;
+            }
+            return View(users.ToList());
         }
 
         // GET: Users/Details/5

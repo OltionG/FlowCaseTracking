@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Flow_CaseTracking.Migrations
 {
     [DbContext(typeof(FlowCaseDbContext))]
-    [Migration("20221222212317_cards")]
+    [Migration("20221222215250_cards")]
     partial class cards
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

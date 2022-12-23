@@ -1,4 +1,4 @@
-﻿namespace Flow_CaseTracking.Models
+﻿namespace FlowCaseTracking.Models
 {
     public class Cards
     {
