@@ -14,6 +14,7 @@ namespace FlowCaseTracking.Database
 
         public DbSet<Boards> Boards { get; set; }
 
+        public DbSet<Lists> Lists { get; set; }
 
 
     }
