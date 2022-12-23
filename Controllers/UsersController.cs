@@ -93,7 +93,7 @@ namespace Flow_CaseTracking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Emri,Mbiemri,Email,Password,DataLindjes,Role")] User user)
+        public async Task<IActionResult> Create([Bind("Id,UserName,Emri,Mbiemri,Email,Password,DataLindjes,Role")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -125,7 +125,7 @@ namespace Flow_CaseTracking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Emri,Mbiemri,Email,Password,DataLindjes,Role")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Emri,Mbiemri,Email,Password,DataLindjes,Role")] User user)
         {
             if (id != user.Id)
             {
