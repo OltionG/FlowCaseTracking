@@ -18,7 +18,9 @@
 <table class="table">
     <thead>
         <tr>
-<<<<<<< HEAD
+        <th>
+                @Html.ActionLink("UserName", "Index", new { sortOrder = ViewBag.UsernameSortParm })
+        </th>
         <th>
                 @Html.ActionLink("Emri", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
@@ -60,33 +62,7 @@
 
         </th>
 		
-        
-    </tr>
-=======
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Emri)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mbiemri)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataLindjes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Role)
-            </th>
-            <th></th>
-        </tr>
->>>>>>> 2ac5bd01330a5fa912099c7f1411d7e5d981cf5b
+       
     </thead>
     <tbody>
 @foreach (var item in Model) {

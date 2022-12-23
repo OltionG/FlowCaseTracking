@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Flow_CaseTracking.Migrations
 {
     [DbContext(typeof(FlowCaseDbContext))]
-    [Migration("20221222215250_cards")]
-    partial class cards
+    [Migration("20221223184215_fixit")]
+    partial class fixit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,6 +80,10 @@ namespace Flow_CaseTracking.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

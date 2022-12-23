@@ -24,6 +24,7 @@ namespace Flow_CaseTracking.Controllers
         // GET: Users
         public async Task<IActionResult> Index(string sortOrder, string searchString, string roles)
         {
+            ViewBag.UsernameSortParm = String.IsNullOrEmpty(sortOrder) ? "username_desc" : "";
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.LastnameSortParm = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
             ViewBag.EmailSortParm = String.IsNullOrEmpty(sortOrder) ? "email_desc" : "";
@@ -42,6 +43,9 @@ namespace Flow_CaseTracking.Controllers
 
 			switch (sortOrder)
             {
+                case "username_desc":
+                    users = users.OrderByDescending(s => s.UserName);
+                    break;
                 case "name_desc":
                     users = users.OrderByDescending(s => s.Emri);
                     break;
